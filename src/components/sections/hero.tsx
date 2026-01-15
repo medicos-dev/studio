@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Button } from '@/components/ui/button';
+import ReserveButton from '@/components/ui/reserve-button';
 import { MoveRight } from 'lucide-react';
 
 const HeroSection = () => {
@@ -27,10 +27,10 @@ const HeroSection = () => {
           A tranquil escape where artistry and flavor intertwine.
         </p>
         <div className="mt-10">
-          <Button size="lg" className="rounded-full text-lg px-8 py-6" onClick={handleScrollToBooking} suppressHydrationWarning>
+          <ReserveButton onClick={handleScrollToBooking} suppressHydrationWarning>
             Reserve a Table
             <MoveRight className="ml-2 h-5 w-5" />
-          </Button>
+          </ReserveButton>
         </div>
       </div>
       

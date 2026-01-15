@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Button } from '@/components/ui/button';
+import ReserveButton from '@/components/ui/reserve-button';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -54,9 +54,9 @@ const BookingSection = () => {
                   <SelectItem value="20:00">8:00 PM</SelectItem>
                 </SelectContent>
               </Select>
-               <Button size="lg" className="md:col-span-2 w-full py-6 text-lg rounded-full">
+               <ReserveButton className="md:col-span-2 w-full">
                 Reserve a Table
-              </Button>
+              </ReserveButton>
             </form>
              <p className="text-center text-sm text-muted-foreground mt-6">
                 For parties larger than 4, we recommend calling us directly for arrangements.
