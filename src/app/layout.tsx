@@ -46,7 +46,6 @@ export default function RootLayout({
               <Footer />
             </div>
             <BackToTopButton />
-            <SpotifyWidget />
             <Toaster />
           </ThemeProvider>
         </StyledComponentsRegistry>

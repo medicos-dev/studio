@@ -88,7 +88,7 @@ const bounce = keyframes`
 // Styled Components
 const WidgetContainer = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 140px; /* Lifted up significantly */
   right: 50px; /* Moved even closer to right */
   z-index: 40;
 

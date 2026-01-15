@@ -4,6 +4,7 @@
 import ReserveButton from '@/components/ui/reserve-button';
 import { MoveRight } from 'lucide-react';
 import WeatherCard from '@/components/ui/weather-card';
+import SpotifyWidget from '@/components/ui/spotify-widget';
 
 const HeroSection = () => {
   const handleScrollToBooking = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -14,6 +15,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[calc(100svh-5rem)] md:h-screen flex items-center justify-center text-center overflow-hidden bg-background py-8 md:py-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_150px_rgba(0,0,0,0.3)]">
       <WeatherCard />
+      <SpotifyWidget />
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full opacity-40 dark:opacity-20">
         <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-primary/20 rounded-full filter blur-3xl animate-blob"></div>
