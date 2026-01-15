@@ -8,7 +8,6 @@ import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { AsterasiaLogo } from './icons';
-import PhotoCard from './PhotoCard';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 
@@ -58,7 +57,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <PhotoCard />
+            <AsterasiaLogo className="h-8 text-primary" />
             <span className="font-headline text-2xl font-bold tracking-tight">
               Asterasia
             </span>

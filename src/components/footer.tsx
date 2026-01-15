@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { AsterasiaLogo, DribbbleIcon, InstagramIcon, TwitterIcon } from './icons';
+import PhotoCard from './PhotoCard';
 import { Button } from './ui/button';
 import {
   Dialog,
@@ -53,7 +54,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-12 text-center md:grid-cols-3 md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <AsterasiaLogo className="h-10 text-primary" />
+            <PhotoCard />
             <p className="mt-4 max-w-xs text-muted-foreground">
               An elegant, warm, and artistic café experience.
             </p>
@@ -97,7 +98,7 @@ export default function Footer() {
                 <form className="grid gap-4 py-4">
                   <Input id="name" placeholder="Name" className="rounded-lg" />
                   <Input id="email" type="email" placeholder="Email" className="rounded-lg" />
-                  <Textarea placeholder="Your message..." className="rounded-lg"/>
+                  <Textarea placeholder="Your message..." className="rounded-lg" />
                   <Button type="submit" className="rounded-full">Send Message</Button>
                 </form>
               </DialogContent>
