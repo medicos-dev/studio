@@ -4,7 +4,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { cn } from '@/lib/utils';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -54,15 +55,15 @@ export default function GalleryPage() {
     <main className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex items-center mb-12">
-            <Button asChild variant="ghost" size="icon" className="mr-4">
-                <Link href="/#gallery">
-                    <ArrowLeft />
-                </Link>
-            </Button>
-            <div className='text-left'>
-                <h1 className="text-4xl md:text-6xl font-bold leading-tight">Our Gallery</h1>
-                <p className="mt-2 text-lg text-muted-foreground">The moments that define us.</p>
-            </div>
+          <Button asChild variant="ghost" size="icon" className="mr-4">
+            <Link href="/#gallery">
+              <ArrowLeft />
+            </Link>
+          </Button>
+          <div className='text-left'>
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">Our Gallery</h1>
+            <p className="mt-2 text-lg text-muted-foreground">The moments that define us.</p>
+          </div>
         </div>
 
         <Dialog>
@@ -78,15 +79,18 @@ export default function GalleryPage() {
           </div>
 
           <DialogContent className="max-w-5xl w-auto bg-transparent border-0 shadow-none">
+            <VisuallyHidden>
+              <DialogTitle>Gallery Image</DialogTitle>
+            </VisuallyHidden>
             {selectedImage && (
-                <Image
-                  src={selectedImage}
-                  alt="Enlarged gallery view"
-                  width={1600}
-                  height={1200}
-                  className="object-contain max-h-[90vh] w-full h-auto rounded-lg"
-                  sizes="90vw"
-                />
+              <Image
+                src={selectedImage}
+                alt="Enlarged gallery view"
+                width={1600}
+                height={1200}
+                className="object-contain max-h-[90vh] w-full h-auto rounded-lg"
+                sizes="90vw"
+              />
             )}
           </DialogContent>
         </Dialog>

@@ -5,7 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -30,10 +31,8 @@ const GalleryImage = ({
   useEffect(() => {
     // This code now only runs on the client, after the component has mounted
     setBorderRadius(
-      `${Math.random() * 40 + 40}% ${Math.random() * 40 + 40}% ${
-        Math.random() * 40 + 40
-      }% ${Math.random() * 40 + 40}% / ${Math.random() * 40 + 40}% ${
-        Math.random() * 40 + 40
+      `${Math.random() * 40 + 40}% ${Math.random() * 40 + 40}% ${Math.random() * 40 + 40
+      }% ${Math.random() * 40 + 40}% / ${Math.random() * 40 + 40}% ${Math.random() * 40 + 40
       }% ${Math.random() * 40 + 40}% ${Math.random() * 40 + 40}%`
     );
   }, []);
@@ -98,32 +97,35 @@ const GallerySection = () => {
               index={2}
               onImageClick={setSelectedImage}
             />
-             <Link href="/gallery" passHref>
-                <div
-                  className="group relative overflow-hidden bg-secondary flex flex-col items-center justify-center p-8 text-center h-full cursor-pointer transition-colors duration-300 hover:bg-secondary/80 col-span-2"
-                  style={{
-                    borderRadius: '60% 40% 30% 70% / 50% 50% 50% 50%',
-                  }}
-                >
-                  <h3 className="text-2xl font-bold text-secondary-foreground">Explore Our Gallery</h3>
-                  <p className="mt-2 text-secondary-foreground/80">See more moments from our café.</p>
-                  <div className="mt-4 inline-flex items-center justify-center rounded-full bg-primary/20 text-primary-foreground px-4 py-2 text-sm font-medium">
-                    View All <ArrowRight className="ml-2 h-4 w-4" />
-                  </div>
+            <Link href="/gallery" passHref>
+              <div
+                className="group relative overflow-hidden bg-secondary flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center h-full cursor-pointer transition-colors duration-300 hover:bg-secondary/80 col-span-2"
+                style={{
+                  borderRadius: '60% 40% 30% 70% / 50% 50% 50% 50%',
+                }}
+              >
+                <h3 className="text-base sm:text-xl md:text-2xl font-bold text-secondary-foreground">Explore Our Gallery</h3>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-secondary-foreground/80 max-w-[80%]">See more moments from our café.</p>
+                <div className="mt-2 sm:mt-4 inline-flex items-center justify-center rounded-full bg-primary/20 text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium">
+                  View All <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </div>
-              </Link>
+              </div>
+            </Link>
           </div>
 
           <DialogContent className="max-w-4xl w-auto bg-transparent border-0 shadow-none">
+            <VisuallyHidden>
+              <DialogTitle>Gallery Image</DialogTitle>
+            </VisuallyHidden>
             {selectedImage && (
-                <Image
-                  src={selectedImage}
-                  alt="Enlarged gallery view"
-                  width={1200}
-                  height={800}
-                  className="object-contain max-h-[90vh] w-full h-auto rounded-lg"
-                  sizes="90vw"
-                />
+              <Image
+                src={selectedImage}
+                alt="Enlarged gallery view"
+                width={1200}
+                height={800}
+                className="object-contain max-h-[90vh] w-full h-auto rounded-lg"
+                sizes="90vw"
+              />
             )}
           </DialogContent>
         </Dialog>
