@@ -14,25 +14,65 @@ interface WeatherData {
 const WeatherCard = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [suggestion, setSuggestion] = useState('');
+  const [suggestion, setSuggestion] = useState<{ text: string, type: 'normal' | 'romantic' }>({ text: '', type: 'normal' });
   const [isNight, setIsNight] = useState(false);
 
   const getDrinkSuggestion = (temp: number) => {
-    // ... [keep existing suggestion logic helper] ...
-    // Note: I will need to include the suggestion logic again or just reference it if I could, 
-    // but since I'm replacing the component body, I'll essentially rewriting the start.
-    // To save tokens/space I will just re-include the logic.
-    const hotPhrases = ["Perfect weather for an Iced Matcha!", "Time for a Mojito Refresher.", "Cool down with a Cold Brew.", "A Peach Iced Tea would be lovely.", "Try our signature Iced Americano.", "Beat the Raiganj heat with a Frappe.", "Cucumber Mint Cooler calling your name.", "A chilled Mango Lassi awaits!", "Sip on a zesty Lemon Soda.", "Iced Caramel Macchiato kind of day."];
-    const warmPhrases = ["Great day for a Latte.", "Enjoy a smooth Flat White.", "How about a Caramel Macchiato?", "Perfect temp for a Cortado.", "A classic Cappuccino fits perfectly.", "Relax with a classic Cold Coffee.", "Time for a Vanilla Sweet Cream Cold Brew.", "Lovely weather for an Affogato.", "Enjoy a smooth Nitro Brew."];
-    const coolPhrases = ["Cozy up with a Cappuccino.", "Perfect weather for an Americano.", "Time for a warm Chai Latte.", "A hot Mocha sounds perfect.", "Warm your soul with a Red Velvet Latte.", "Steaming cup of Earl Grey/Masala Chai?", "Perfect time for a Hazelnut Latte.", "Warm up with a Hot Chocolate."];
-    const coldPhrases = ["Warm up with Hot Cocoa.", "Espresso weather.", "Time for a hot tea.", "Perfect for a Gingerbread Latte.", "Stay warm with a Double Espresso.", "Freezing? Grab a Turmeric Latte.", "Best time for a hot ginger tea.", "Double piping hot Cappuccino."];
+    // Array of { text: string, type: 'normal' | 'romantic' }
+    const hotPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
+      { text: "Escape the heat with our signature refreshing Iced Matcha!", type: 'normal' },
+      { text: "Too hot outside? Our Mojito is your perfect getaway.", type: 'normal' },
+      { text: "Chill vibes only with our premium Cold Brew.", type: 'normal' },
+      { text: "A sip of our Peach Iced Tea is a sip of paradise.", type: 'normal' },
+      { text: "You + Iced Americano = The perfect summer love story.", type: 'romantic' },
+      { text: "Beat the Raiganj heat with a creamy, dreamy Frappe.", type: 'normal' },
+      { text: "Treat yourself to a Cucumber Mint Cooler. You deserve it.", type: 'normal' },
+      { text: "Sweating? Let our chilled Mango Lassi save the day.", type: 'normal' },
+      { text: "Hot days call for cool dates and Iced Lattes.", type: 'romantic' },
+      { text: "Share a refreshing Lemon Soda with someone special.", type: 'romantic' }
+    ];
 
-    let phrase = "";
-    if (temp >= 28) phrase = hotPhrases[Math.floor(Math.random() * hotPhrases.length)];
-    else if (temp >= 20) phrase = warmPhrases[Math.floor(Math.random() * warmPhrases.length)];
-    else if (temp >= 12) phrase = coolPhrases[Math.floor(Math.random() * coolPhrases.length)];
-    else phrase = coldPhrases[Math.floor(Math.random() * coldPhrases.length)];
-    return phrase;
+    const warmPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
+      { text: "It's a beautiful day for our smooth, handcrafted Latte.", type: 'normal' },
+      { text: "Experience the velvet touch of our Flat White.", type: 'normal' },
+      { text: "Sweeten your day with a Caramel Macchiato.", type: 'normal' },
+      { text: "Perfect temperature for coffee and conversation.", type: 'romantic' },
+      { text: "A classic Cappuccino, made just for you.", type: 'normal' },
+      { text: "Relax and unwind with our signature Cold Coffee.", type: 'normal' },
+      { text: "Vanilla Sweet Cream Cold Brew: Love at first sip.", type: 'romantic' },
+      { text: "Treat your date to a delicious Affogato.", type: 'romantic' },
+      { text: "Smooth Nitro Brew for a smooth day ahead.", type: 'normal' }
+    ];
+
+    const coolPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
+      { text: "Cozy vibes and Cappuccinos. The perfect match.", type: 'normal' },
+      { text: "Warm hands, warm heart. Try our Americano.", type: 'romantic' },
+      { text: "Cuddle weather calls for a warm Chai Latte.", type: 'romantic' },
+      { text: "A hot Mocha to warm your soul today.", type: 'normal' },
+      { text: "Red Velvet Latte: A hug in a mug.", type: 'normal' },
+      { text: "Nothing beats a steaming cup of Earl Grey.", type: 'normal' },
+      { text: "Fall in love with our Hazelnut Latte.", type: 'romantic' },
+      { text: "Rich Hot Chocolate. Pure liquid happiness.", type: 'normal' }
+    ];
+
+    const coldPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
+      { text: "Baby it's cold outside. Warm up with Hot Cocoa.", type: 'romantic' },
+      { text: "Espresso weather is the best weather.", type: 'normal' },
+      { text: "Wrap your hands around a steaming hot tea.", type: 'normal' },
+      { text: "Spice up the chill with a Gingerbread Latte.", type: 'normal' },
+      { text: "Keep each other warm with Double Espressos.", type: 'romantic' },
+      { text: "Freezing? Our Turmeric Latte is a warm embrace.", type: 'normal' },
+      { text: "Best time for deep talks and hot ginger tea.", type: 'romantic' },
+      { text: "Double piping hot Cappuccino to melt the frost.", type: 'normal' }
+    ];
+
+    let selection;
+    if (temp >= 28) selection = hotPhrases[Math.floor(Math.random() * hotPhrases.length)];
+    else if (temp >= 20) selection = warmPhrases[Math.floor(Math.random() * warmPhrases.length)];
+    else if (temp >= 12) selection = coolPhrases[Math.floor(Math.random() * coolPhrases.length)];
+    else selection = coldPhrases[Math.floor(Math.random() * coldPhrases.length)];
+
+    return selection;
   };
 
   useEffect(() => {
@@ -52,7 +92,11 @@ const WeatherCard = () => {
         setIsNight(nightStatus);
 
         setWeather({ temperature: currentTemp, city: "Raiganj", country: "West Bengal", date: date, weatherCode: data.current.weather_code });
-        setSuggestion(getDrinkSuggestion(currentTemp));
+
+        const selection = getDrinkSuggestion(currentTemp);
+        // Explicitly ensuring the type matches the state
+        setSuggestion(selection || { text: '', type: 'normal' });
+
         setLoading(false);
       } catch (error) {
         console.error("Weather fetch error:", error);
@@ -63,6 +107,9 @@ const WeatherCard = () => {
   }, []);
 
   if (loading || !weather) return null;
+
+  const DecorComponent = suggestion.type === 'romantic' ? HeartDecor : LeafDecor;
+  const decorColor = suggestion.type === 'romantic' ? 'text-red-500' : 'text-current';
 
   return (
     <ContainerWrapper>
@@ -106,48 +153,60 @@ const WeatherCard = () => {
         </div>
       </StyledWrapper>
       <SignatureText>
-        {/* Leaf decorations on outer borders - primarily using the 'top-right' leaf style as requested */}
-        {/* Top Border */}
-        <LeafDecor className="top-right-main">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        <LeafDecor className="top-left-mirror">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-
-        {/* Side Borders */}
-        <LeafDecor className="right-mid">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        <LeafDecor className="left-mid">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-
-        {/* Bottom Borders */}
-        <LeafDecor className="bottom-right-decor">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        <LeafDecor className="bottom-left-decor">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        <LeafDecor className="bottom-mid">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        {suggestion}
+        {/* Decorations - switching between Heart and Leaf based on type */}
+        <DecorComponent className="top-right-main">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+              {/* Blobby Heart Path */}
+              <path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="top-left-mirror">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="right-mid">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="left-mid">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="bottom-right-decor">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="bottom-left-decor">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        <DecorComponent className="bottom-mid">
+          {suggestion.type === 'romantic' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256,464c-117.8,-75.7 -198.8,-139.7 -208.6,-220.1C39.4,179 46.5,123.6 86.6,83.9c50.8,-50.3 116.8,-15.8 132.4,1.4c29.6,32.7 54.4,26.5 74,1.4c15.6,-17.2 81.6,-51.7 132.4,-1.4c40.1,39.7 47.9,94.3 39.2,160C454.8,324.3 373.8,388.3 256,464z" /></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor"><path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" /></svg>
+          )}
+        </DecorComponent>
+        {suggestion.text}
       </SignatureText>
     </ContainerWrapper>
   );
@@ -473,6 +532,82 @@ const StyledWrapper = styled.div<{ $isNight: boolean }>`
     font-size: 13px;
     line-height: 134.49%;
     color: ${props => props.$isNight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(87, 77, 51, 0.66)'};
+  }
+`;
+
+// Heart decoration with dripping effect
+const HeartDecor = styled.div`
+  position: absolute;
+  z-index: -1;
+  opacity: 0.9;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
+  
+  svg {
+    width: 24px;
+    height: auto;
+    fill: currentColor;
+  }
+  
+  &.top-right-main {
+    top: -24px;
+    right: -15px;
+    color: #ef4444; 
+    transform: rotate(10deg);
+    animation: drip 3s infinite ease-in-out;
+  }
+
+  &.top-left-mirror {
+    top: -22px;
+    left: -12px;
+    color: #ec4899; 
+    transform: rotate(-10deg);
+    animation: drip 3s infinite ease-in-out 1.5s;
+  }
+
+  &.right-mid {
+    top: 50%;
+    right: -18px;
+    color: #f43f5e; 
+    transform: rotate(90deg);
+    animation: drip 3.5s infinite ease-in-out 0.5s;
+  }
+
+  &.left-mid {
+    top: 40%;
+    left: -18px;
+    color: #d946ef; 
+    transform: rotate(-90deg);
+    animation: drip 3.5s infinite ease-in-out 2s;
+  }
+
+  &.bottom-right-decor {
+    bottom: -15px;
+    right: -10px;
+    color: #ef4444;
+    transform: rotate(135deg);
+    animation: drip 4s infinite ease-in-out 1s;
+  }
+
+  &.bottom-left-decor {
+    bottom: -12px;
+    left: -10px;
+    color: #ec4899;
+    transform: rotate(-135deg);
+    animation: drip 4s infinite ease-in-out 2.5s;
+  }
+
+  &.bottom-mid {
+    bottom: -18px;
+    left: 45%;
+    color: #f43f5e;
+    transform: rotate(180deg);
+    animation: drip 3s infinite ease-in-out 1.5s;
+  }
+
+  /* Drip animation that grows "out" from the anchor point (tip) */
+  @keyframes drip {
+    0%, 100% { transform: translateY(0px) scale(1) rotate(var(--tw-rotate, 0)); }
+    50% { transform: translateY(-3px) scale(1.1) rotate(var(--tw-rotate, 0)); }
   }
 `;
 

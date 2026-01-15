@@ -37,10 +37,10 @@ const BookingSection = () => {
               <Input placeholder="Full Name" className="h-12 md:py-6 rounded-full" />
               <Input type="email" placeholder="Email Address" className="h-12 md:py-6 rounded-full" />
               <Select>
-                <SelectTrigger className="h-12 md:py-6 rounded-full border border-input bg-background/50 backdrop-blur-sm hover:bg-muted/50 hover:border-primary/50 transition-all duration-200">
+                <SelectTrigger className="h-12 md:py-6 rounded-full border border-input bg-background/30 backdrop-blur-sm hover:bg-muted/50 hover:border-primary/50 transition-all duration-200">
                   <SelectValue placeholder="Number of Guests" />
                 </SelectTrigger>
-                <SelectContent className="border border-border/30 bg-background/40 backdrop-blur-xl shadow-xl shadow-black/5 rounded-2xl p-1">
+                <SelectContent className="border border-border/30 bg-background/20 backdrop-blur-xl shadow-xl shadow-black/5 rounded-2xl p-1">
                   <SelectItem value="1" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">1 Guest</SelectItem>
                   <SelectItem value="2" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">2 Guests</SelectItem>
                   <SelectItem value="3" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">3 Guests</SelectItem>
@@ -55,10 +55,10 @@ const BookingSection = () => {
                 className="h-12"
               />
               <Select>
-                <SelectTrigger className="h-12 md:py-6 rounded-full border border-input bg-background/50 backdrop-blur-sm hover:bg-muted/50 hover:border-primary/50 transition-all duration-200">
+                <SelectTrigger className="h-12 md:py-6 rounded-full border border-input bg-background/30 backdrop-blur-sm hover:bg-muted/50 hover:border-primary/50 transition-all duration-200">
                   <SelectValue placeholder="Time" />
                 </SelectTrigger>
-                <SelectContent className="border border-border/30 bg-background/40 backdrop-blur-xl shadow-xl shadow-black/5 rounded-2xl p-1">
+                <SelectContent className="border border-border/30 bg-background/20 backdrop-blur-xl shadow-xl shadow-black/5 rounded-2xl p-1">
                   <SelectItem value="10:00" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">10:00 AM</SelectItem>
                   <SelectItem value="12:00" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">12:00 PM</SelectItem>
                   <SelectItem value="14:00" className="rounded-xl focus:bg-primary focus:text-primary-foreground cursor-pointer transition-colors m-1">2:00 PM</SelectItem>
