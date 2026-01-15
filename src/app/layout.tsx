@@ -7,6 +7,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import StyledComponentsRegistry from '@/lib/styled-components-registry';
 import BackToTopButton from '@/components/ui/back-to-top';
+import SpotifyWidget from '@/components/ui/spotify-widget';
 
 export const metadata: Metadata = {
   title: 'Asterasia Café',
@@ -45,6 +46,7 @@ export default function RootLayout({
               <Footer />
             </div>
             <BackToTopButton />
+            <SpotifyWidget />
             <Toaster />
           </ThemeProvider>
         </StyledComponentsRegistry>
