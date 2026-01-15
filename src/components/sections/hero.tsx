@@ -12,7 +12,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[calc(100svh-5rem)] md:h-screen flex items-center justify-center text-center overflow-hidden bg-background py-8 md:py-0">
+    <section className="relative min-h-[calc(100svh-5rem)] md:h-screen flex items-center justify-center text-center overflow-hidden bg-background py-8 md:py-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_150px_rgba(0,0,0,0.3)]">
       <WeatherCard />
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full opacity-40 dark:opacity-20">

@@ -16,7 +16,6 @@ const WeatherCard = () => {
   const [loading, setLoading] = useState(true);
   const [suggestion, setSuggestion] = useState('');
 
-  // Function to get drink suggestion based on temperature and weather code
   const getDrinkSuggestion = (temp: number) => {
     const hotPhrases = [
       "Perfect weather for an Iced Matcha!",
@@ -81,7 +80,6 @@ const WeatherCard = () => {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Hardcoded Raiganj coordinates
         const lat = 25.6208;
         const lon = 88.1264;
 
@@ -91,7 +89,6 @@ const WeatherCard = () => {
         const data = await response.json();
 
         const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-
         const currentTemp = Math.round(data.current.temperature_2m);
 
         setWeather({
@@ -143,65 +140,160 @@ const WeatherCard = () => {
         </div>
       </StyledWrapper>
       <SignatureText>
-        {/* Beautiful Fern/Bushy Leaf - Top Left Corner - Moved further out */}
-        <div className="absolute -z-10 -top-10 -left-10 text-secondary/80 transform -rotate-45" style={{ filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.1))' }}>
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.5,1.91L16.68,2.73L13.3,6.1L15.39,8.19L18.77,4.82L19.59,5.64L13.85,11.38C13.85,11.38 12.33,14.6 12.58,16.89C11.53,15.35 11.23,12.5 11.23,12.5L2,21.71L2.81,22.5L12.04,13.25C12.04,13.25 14.89,12.96 16.42,11.91C14.13,12.16 10.91,10.64 10.91,10.64L16.65,4.9L17.47,5.72L14.09,9.1L16.18,11.19L19.56,7.8L20.38,8.63L16.29,12.72L17.11,13.54L22,8.65L17.5,1.91Z" />
+        {/* Leaf decorations on outer borders - primarily using the 'top-right' leaf style as requested */}
+        {/* Top Border */}
+        <LeafDecor className="top-right-main">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
           </svg>
-        </div>
-
-        {/* Elegant Flower - Bottom Right Corner - Moved further out */}
-        <div className="absolute -z-10 -bottom-8 -right-8 text-primary/70 transform rotate-12" style={{ filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.1))' }}>
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12,2C10.5,2 9.5,3.5 9.5,5C9.5,6.5 10.5,8 12,8C13.5,8 14.5,6.5 14.5,5C14.5,3.5 13.5,2 12,2M5,9.5C3.5,9.5 2,10.5 2,12C2,13.5 3.5,14.5 5,14.5C6.5,14.5 8,13.5 8,12C8,10.5 6.5,9.5 5,9.5M12,16C10.5,16 9.5,17.5 9.5,19C9.5,20.5 10.5,22 12,22C13.5,22 14.5,20.5 14.5,19C14.5,17.5 13.5,16 12,16M19,9.5C17.5,9.5 16,10.5 16,12C16,13.5 17.5,14.5 19,14.5C20.5,14.5 22,13.5 22,12C22,10.5 20.5,9.5 19,9.5M12,10C10.9,10 10,10.9 10,12C10,13.1 10.9,14 12,14C13.1,14 14,13.1 14,12C14,10.9 13.1,10 12,10Z" />
+        </LeafDecor>
+        <LeafDecor className="top-left-mirror">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
           </svg>
-        </div>
+        </LeafDecor>
 
-        {/* Small Leaf - Top Right - Moved further out */}
-        <div className="absolute -z-10 -top-8 -right-6 text-accent/60 transform rotate-45 scale-90">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" /></svg>
-        </div>
+        {/* Side Borders */}
+        <LeafDecor className="right-mid">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
+        <LeafDecor className="left-mid">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
 
-        {/* Removed Bottom Left Branch Leaf as requested */}
+        {/* Bottom Borders */}
+        <LeafDecor className="bottom-right-decor">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
+        <LeafDecor className="bottom-left-decor">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
+        <LeafDecor className="top-mid">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
+        <LeafDecor className="bottom-mid">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
+            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
+          </svg>
+        </LeafDecor>
         {suggestion}
       </SignatureText>
     </ContainerWrapper>
   );
 }
 
-// Wrapper to position everything
+// Wrapper - moved more toward center
 const ContainerWrapper = styled.div`
-  position: absolute; /* Changed from fixed to absolute for Hero section */
-  top: 40px; /* Adjusted for Hero section */
-  left: 40px;
+  position: absolute;
+  top: 40px;
+  left: 120px; /* Moved more toward center */
   z-index: 40;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px;
+  gap: 12px;
 
   @media (max-width: 1024px) {
     display: none; /* Hide on tablets and mobile */
   }
 `;
 
+// Leaf decoration on borders
+const LeafDecor = styled.div`
+  position: absolute;
+  z-index: -1;
+  opacity: 0.7;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));
+  
+  svg {
+    width: 22px;
+    height: auto;
+  }
+  
+  &.top-right-main {
+    top: -20px;
+    right: -15px;
+    color: hsl(var(--primary) / 0.8);
+    transform: rotate(20deg);
+  }
+
+  &.top-left-mirror {
+    top: -18px;
+    left: -12px;
+    color: hsl(var(--secondary) / 0.7);
+    transform: rotate(-30deg) scaleX(-1);
+  }
+
+  &.right-mid {
+    top: 50%;
+    right: -18px;
+    color: hsl(var(--accent) / 0.6);
+    transform: rotate(90deg);
+  }
+
+  &.left-mid {
+    top: 40%;
+    left: -18px;
+    color: hsl(var(--primary) / 0.5);
+    transform: rotate(-90deg);
+  }
+
+  &.bottom-right-decor {
+    bottom: -15px;
+    right: -10px;
+    color: hsl(var(--secondary) / 0.8);
+    transform: rotate(135deg);
+  }
+
+  &.bottom-left-decor {
+    bottom: -12px;
+    left: -10px;
+    color: hsl(var(--primary) / 0.6);
+    transform: rotate(-135deg) scaleX(-1);
+  }
+
+  &.top-mid {
+    top: -18px;
+    left: 45%;
+    color: hsl(var(--accent) / 0.5);
+    transform: rotate(0deg);
+  }
+
+  &.bottom-mid {
+    bottom: -16px;
+    left: 40%;
+    color: hsl(var(--secondary) / 0.7);
+    transform: rotate(180deg);
+  }
+`;
+
+// Smaller signature text box
 const SignatureText = styled.div`
   font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: hsl(var(--foreground));
   background: hsl(var(--background) / 0.9);
   backdrop-filter: blur(8px);
-  padding: 1.5rem 2.5rem; /* Increased padding */
-  border-radius: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     0 0 0 1px hsl(var(--primary) / 0.2);
   transform: rotate(-2deg);
-  max-width: 280px;
-  line-height: 1.4;
+  max-width: 240px;
+  line-height: 1.3;
   position: relative;
-  
   text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
 
   animation: float 6s ease-in-out infinite;
@@ -211,19 +303,12 @@ const SignatureText = styled.div`
       50% { transform: translateY(-5px) rotate(-1deg); }
       100% { transform: translateY(0px) rotate(-2deg); }
   }
-    z-index: -1;
-    opacity: 0.8;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
-  }
-  
-  /* We will use React components for the actual icons to be more decorative */
 `;
 
 const StyledWrapper = styled.div`
-  /* Scale down the card slightly so it's not huge */
   transform: scale(0.65); 
   transform-origin: top left;
-  margin-bottom: -70px; /* Compensate for scaling whitespace */
+  margin-bottom: -70px;
   margin-right: -100px;
 
   .card {
@@ -231,7 +316,7 @@ const StyledWrapper = styled.div`
     height: 235px;
     position: relative;
     padding: 25px;
-    background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #FFF7B1 0%, rgba(255, 255, 255, 0) 71.88%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #FFFFFF;
+    background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #FFF7B1 0%, rgba(255, 255, 255, 0) 71.88%), #FFFFFF;
     box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: 23px;
     transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
@@ -317,7 +402,6 @@ const StyledWrapper = styled.div`
   .sun {
     width: 120px;
     height: 120px;
-    background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
     background: linear-gradient(to right, #fcbb04, #fffc00);
     border-radius: 60px;
     display: inline;
@@ -333,7 +417,6 @@ const StyledWrapper = styled.div`
       transform: scale(1);
       opacity: 0.6;
     }
-
     100% {
       transform: scale(1.4);
       opacity: 0;
@@ -341,23 +424,16 @@ const StyledWrapper = styled.div`
   }
 
   @keyframes clouds {
-    0% {
-      transform: translateX(15px);
-    }
-
-    50% {
-      transform: translateX(0px);
-    }
-
-    100% {
-      transform: translateX(15px);
-    }
+    0% { transform: translateX(15px); }
+    50% { transform: translateX(0px); }
+    100% { transform: translateX(15px); }
   }
 
   .card-header {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
   }
 
   .card-header span:first-child {
@@ -403,6 +479,7 @@ const StyledWrapper = styled.div`
     font-size: 13px;
     line-height: 134.49%;
     color: rgba(87, 77, 51, 0.66);
-  }`;
+  }
+`;
 
 export default WeatherCard;

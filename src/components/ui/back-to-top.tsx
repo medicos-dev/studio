@@ -43,9 +43,13 @@ const BackToTopButton = () => {
 
 const StyledWrapper = styled.div`
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 20px;
   z-index: 50;
+
+  @media (max-width: 768px) {
+    bottom: 80px; /* Even higher on mobile to avoid footer overlap */
+  }
 
   .button {
     width: 50px;
