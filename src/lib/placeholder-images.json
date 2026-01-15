@@ -1,0 +1,106 @@
+{
+  "placeholderImages": [
+    {
+      "id": "about-1",
+      "description": "Artistic shot of cafe interior",
+      "imageUrl": "https://images.unsplash.com/photo-1612192527395-06b72da6b35a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYWZlJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzY4NDUwMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe interior"
+    },
+    {
+      "id": "about-2",
+      "description": "Close up of a coffee cup",
+      "imageUrl": "https://images.unsplash.com/photo-1610632380989-680fe40816c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb2ZmZWUlMjBjdXB8ZW58MHx8fHwxNzY4NDI1MzU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee cup"
+    },
+    {
+      "id": "menu-1",
+      "description": "A latte with beautiful art",
+      "imageUrl": "https://images.unsplash.com/photo-1512568400610-62da28bc8a13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsYXR0ZSUyMGFydHxlbnwwfHx8fDE3Njg0Mjc3MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "latte art"
+    },
+    {
+      "id": "menu-2",
+      "description": "A slice of delicious cheesecake",
+      "imageUrl": "https://images.unsplash.com/photo-1710362778452-07fabf048bb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaGVlc2VjYWtlJTIwc2xpY2V8ZW58MHx8fHwxNzY4NDUyOTEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cheesecake slice"
+    },
+    {
+      "id": "menu-3",
+      "description": "A savory pastry",
+      "imageUrl": "https://images.unsplash.com/photo-1737700089482-e6ce492f712f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzYXZvcnklMjBwYXN0cnl8ZW58MHx8fHwxNzY4NDczMDUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "savory pastry"
+    },
+    {
+      "id": "gallery-1",
+      "description": "A person pouring milk into coffee",
+      "imageUrl": "https://images.unsplash.com/photo-1522659516672-189a712c29af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb2ZmZWUlMjBtYWtpbmd8ZW58MHx8fHwxNzY4NDc3ODE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee making"
+    },
+    {
+      "id": "gallery-2",
+      "description": "A cozy corner of the cafe",
+      "imageUrl": "https://images.unsplash.com/photo-1630098897299-72713bac42a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjYWZlJTIwY29ybmVyfGVufDB8fHx8MTc2ODQ3NzgxOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe corner"
+    },
+    {
+      "id": "gallery-3",
+      "description": "Steam rising from a coffee cup",
+      "imageUrl": "https://images.unsplash.com/photo-1574749205488-3a56f8a1109d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2ZmZWUlMjBzdGVhbXxlbnwwfHx8fDE3Njg0Nzc4MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee steam"
+    },
+    {
+      "id": "gallery-4",
+      "description": "A wide shot of the cafe seating area",
+      "imageUrl": "https://images.unsplash.com/photo-1549804795-05e3d7ec4d3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYWZlJTIwc2VhdGluZ3xlbnwwfHx8fDE3Njg0NDU2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe seating"
+    },
+    {
+      "id": "gallery-5",
+      "description": "A selection of pastries on a plate",
+      "imageUrl": "https://images.unsplash.com/photo-1591538519435-4578c3ba26d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwYXN0cnklMjBzZWxlY3Rpb258ZW58MHx8fHwxNzY4NDc3ODE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pastry selection"
+    },
+    {
+      "id": "gallery-6",
+      "description": "Close up on coffee beans",
+      "imageUrl": "https://images.unsplash.com/photo-1675306408031-a9aad9f23308?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBiZWFuc3xlbnwwfHx8fDE3NjgzNzQ2OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee beans"
+    },
+    {
+      "id": "gallery-7",
+      "description": "Barista at work",
+      "imageUrl": "https://images.unsplash.com/photo-1560354291-e7df824f3cd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxiYXJpc3RhJTIwd29ya3xlbnwwfHx8fDE3Njg0ODI2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "barista work"
+    },
+    {
+      "id": "gallery-8",
+      "description": "Cafe exterior view",
+      "imageUrl": "https://images.unsplash.com/photo-1766934394694-020bc108bd5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjYWZlJTIwZXh0ZXJpb3J8ZW58MHx8fHwxNzY4NDgyNjYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe exterior"
+    },
+    {
+      "id": "gallery-9",
+      "description": "Latte art in detail",
+      "imageUrl": "https://images.unsplash.com/photo-1542100349-01abfa1145f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxsYXR0ZSUyMGRldGFpbHxlbnwwfHx8fDE3Njg0ODI2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "latte detail"
+    },
+    {
+      "id": "gallery-10",
+      "description": "Customers enjoying coffee",
+      "imageUrl": "https://images.unsplash.com/photo-1751607217088-82bacdf70270?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjdXN0b21lcnMlMjBjb2ZmZWV8ZW58MHx8fHwxNzY4NDgyNjU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "customers coffee"
+    },
+    {
+      "id": "gallery-11",
+      "description": "Morning light in the cafe",
+      "imageUrl": "https://images.unsplash.com/photo-1583124688253-60c350bc90d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYWZlJTIwbW9ybmluZ3xlbnwwfHx8fDE3Njg0ODI2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe morning"
+    },
+    {
+      "id": "gallery-12",
+      "description": "Freshly baked croissants",
+      "imageUrl": "https://images.unsplash.com/photo-1692742249337-3bf05e2b1ed7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxiYWtlZCUyMGNyb2lzc2FudHN8ZW58MHx8fHwxNzY4MzgxNDQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "baked croissants"
+    }
+  ]
+}
