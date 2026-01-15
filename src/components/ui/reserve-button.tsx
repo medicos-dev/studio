@@ -10,10 +10,10 @@ interface ReserveButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const ReserveButton: React.FC<ReserveButtonProps> = ({ children, ...props }) => {
   return (
     <StyledWrapper>
-      <button {...props}>
+      <button {...props} suppressHydrationWarning>
         <span className="button-content">{children}</span>
         <div className="icon-1">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd'} as React.CSSProperties} viewBox="0 0 26.3 65.33" xmlnsXlink="http://www.w3.org/1999/xlink">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{ shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd' } as React.CSSProperties} viewBox="0 0 26.3 65.33" xmlnsXlink="http://www.w3.org/1999/xlink">
             <defs />
             <g id="Layer_x0020_1">
               <metadata id="CorelCorpID_0Corel-Layer" />
@@ -22,7 +22,7 @@ const ReserveButton: React.FC<ReserveButtonProps> = ({ children, ...props }) => 
           </svg>
         </div>
         <div className="icon-2">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd'} as React.CSSProperties} viewBox="0 0 11.67 37.63" xmlnsXlink="http://www.w3.org/1999/xlink">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{ shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd' } as React.CSSProperties} viewBox="0 0 11.67 37.63" xmlnsXlink="http://www.w3.org/1999/xlink">
             <defs />
             <g id="Layer_x0020_1">
               <metadata id="CorelCorpID_0Corel-Layer" />
@@ -31,7 +31,7 @@ const ReserveButton: React.FC<ReserveButtonProps> = ({ children, ...props }) => 
           </svg>
         </div>
         <div className="icon-3">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd'} as React.CSSProperties} viewBox="0 0 25.29 76.92" xmlnsXlink="http://www.w3.org/1999/xlink">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{ shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd' } as React.CSSProperties} viewBox="0 0 25.29 76.92" xmlnsXlink="http://www.w3.org/1999/xlink">
             <defs />
             <g id="Layer_x0020_1">
               <metadata id="CorelCorpID_0Corel-Layer" />

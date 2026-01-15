@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import StyledComponentsRegistry from '@/lib/styled-components-registry';
+import BackToTopButton from '@/components/ui/back-to-top';
 
 export const metadata: Metadata = {
   title: 'Asterasia Café',
@@ -30,6 +31,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="font-body antialiased">
         <StyledComponentsRegistry>
@@ -39,6 +44,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
+            <BackToTopButton />
             <Toaster />
           </ThemeProvider>
         </StyledComponentsRegistry>

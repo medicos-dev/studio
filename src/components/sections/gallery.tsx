@@ -106,7 +106,7 @@ const GallerySection = () => {
               >
                 <h3 className="text-base sm:text-xl md:text-2xl font-bold text-secondary-foreground">Explore Our Gallery</h3>
                 <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-secondary-foreground/80 max-w-[80%]">See more moments from our café.</p>
-                <div className="mt-2 sm:mt-4 inline-flex items-center justify-center rounded-full bg-primary/20 text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium">
+                <div className="mt-2 sm:mt-4 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium hover:bg-primary/90 transition-colors">
                   View All <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </div>
               </div>
