@@ -15,65 +15,23 @@ const WeatherCard = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [suggestion, setSuggestion] = useState('');
+  const [isNight, setIsNight] = useState(false);
 
   const getDrinkSuggestion = (temp: number) => {
-    const hotPhrases = [
-      "Perfect weather for an Iced Matcha!",
-      "Time for a Mojito Refresher.",
-      "Cool down with a Cold Brew.",
-      "A Peach Iced Tea would be lovely.",
-      "Try our signature Iced Americano.",
-      "Beat the Raiganj heat with a Frappe.",
-      "Cucumber Mint Cooler calling your name.",
-      "A chilled Mango Lassi awaits!",
-      "Sip on a zesty Lemon Soda.",
-      "Iced Caramel Macchiato kind of day."
-    ];
-
-    const warmPhrases = [
-      "Great day for a Latte.",
-      "Enjoy a smooth Flat White.",
-      "How about a Caramel Macchiato?",
-      "Perfect temp for a Cortado.",
-      "A classic Cappuccino fits perfectly.",
-      "Relax with a classic Cold Coffee.",
-      "Time for a Vanilla Sweet Cream Cold Brew.",
-      "Lovely weather for an Affogato.",
-      "Enjoy a smooth Nitro Brew."
-    ];
-
-    const coolPhrases = [
-      "Cozy up with a Cappuccino.",
-      "Perfect weather for an Americano.",
-      "Time for a warm Chai Latte.",
-      "A hot Mocha sounds perfect.",
-      "Warm your soul with a Red Velvet Latte.",
-      "Steaming cup of Earl Grey/Masala Chai?",
-      "Perfect time for a Hazelnut Latte.",
-      "Warm up with a Hot Chocolate."
-    ];
-
-    const coldPhrases = [
-      "Warm up with Hot Cocoa.",
-      "Espresso weather.",
-      "Time for a hot tea.",
-      "Perfect for a Gingerbread Latte.",
-      "Stay warm with a Double Espresso.",
-      "Freezing? Grab a Turmeric Latte.",
-      "Best time for a hot ginger tea.",
-      "Double piping hot Cappuccino."
-    ];
+    // ... [keep existing suggestion logic helper] ...
+    // Note: I will need to include the suggestion logic again or just reference it if I could, 
+    // but since I'm replacing the component body, I'll essentially rewriting the start.
+    // To save tokens/space I will just re-include the logic.
+    const hotPhrases = ["Perfect weather for an Iced Matcha!", "Time for a Mojito Refresher.", "Cool down with a Cold Brew.", "A Peach Iced Tea would be lovely.", "Try our signature Iced Americano.", "Beat the Raiganj heat with a Frappe.", "Cucumber Mint Cooler calling your name.", "A chilled Mango Lassi awaits!", "Sip on a zesty Lemon Soda.", "Iced Caramel Macchiato kind of day."];
+    const warmPhrases = ["Great day for a Latte.", "Enjoy a smooth Flat White.", "How about a Caramel Macchiato?", "Perfect temp for a Cortado.", "A classic Cappuccino fits perfectly.", "Relax with a classic Cold Coffee.", "Time for a Vanilla Sweet Cream Cold Brew.", "Lovely weather for an Affogato.", "Enjoy a smooth Nitro Brew."];
+    const coolPhrases = ["Cozy up with a Cappuccino.", "Perfect weather for an Americano.", "Time for a warm Chai Latte.", "A hot Mocha sounds perfect.", "Warm your soul with a Red Velvet Latte.", "Steaming cup of Earl Grey/Masala Chai?", "Perfect time for a Hazelnut Latte.", "Warm up with a Hot Chocolate."];
+    const coldPhrases = ["Warm up with Hot Cocoa.", "Espresso weather.", "Time for a hot tea.", "Perfect for a Gingerbread Latte.", "Stay warm with a Double Espresso.", "Freezing? Grab a Turmeric Latte.", "Best time for a hot ginger tea.", "Double piping hot Cappuccino."];
 
     let phrase = "";
-    if (temp >= 28) {
-      phrase = hotPhrases[Math.floor(Math.random() * hotPhrases.length)];
-    } else if (temp >= 20) {
-      phrase = warmPhrases[Math.floor(Math.random() * warmPhrases.length)];
-    } else if (temp >= 12) {
-      phrase = coolPhrases[Math.floor(Math.random() * coolPhrases.length)];
-    } else {
-      phrase = coldPhrases[Math.floor(Math.random() * coldPhrases.length)];
-    }
+    if (temp >= 28) phrase = hotPhrases[Math.floor(Math.random() * hotPhrases.length)];
+    else if (temp >= 20) phrase = warmPhrases[Math.floor(Math.random() * warmPhrases.length)];
+    else if (temp >= 12) phrase = coolPhrases[Math.floor(Math.random() * coolPhrases.length)];
+    else phrase = coldPhrases[Math.floor(Math.random() * coldPhrases.length)];
     return phrase;
   };
 
@@ -82,32 +40,25 @@ const WeatherCard = () => {
       try {
         const lat = 25.6208;
         const lon = 88.1264;
-
-        const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`
-        );
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`);
         const data = await response.json();
 
         const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
         const currentTemp = Math.round(data.current.temperature_2m);
+        const hour = new Date().getHours();
 
-        setWeather({
-          temperature: currentTemp,
-          city: "Raiganj",
-          country: "West Bengal",
-          date: date,
-          weatherCode: data.current.weather_code
-        });
+        // Assume night is before 6 AM or after 6 PM
+        const nightStatus = hour >= 18 || hour < 6;
+        setIsNight(nightStatus);
 
+        setWeather({ temperature: currentTemp, city: "Raiganj", country: "West Bengal", date: date, weatherCode: data.current.weather_code });
         setSuggestion(getDrinkSuggestion(currentTemp));
         setLoading(false);
-
       } catch (error) {
         console.error("Weather fetch error:", error);
         setLoading(false);
       }
     };
-
     fetchWeather();
   }, []);
 
@@ -115,15 +66,30 @@ const WeatherCard = () => {
 
   return (
     <ContainerWrapper>
-      <StyledWrapper>
+      <StyledWrapper $isNight={isNight}>
         <div className="card">
           <div className="container">
             <div className="cloud front">
               <span className="left-front" />
               <span className="right-front" />
             </div>
-            <span className="sun sunshine" />
-            <span className="sun" />
+
+            {isNight ? (
+              <>
+                <span className="moon" />
+                <div className="stars">
+                  <span className="star s1" />
+                  <span className="star s2" />
+                  <span className="star s3" />
+                </div>
+              </>
+            ) : (
+              <>
+                <span className="sun sunshine" />
+                <span className="sun" />
+              </>
+            )}
+
             <div className="cloud back">
               <span className="left-back" />
               <span className="right-back" />
@@ -172,11 +138,6 @@ const WeatherCard = () => {
           </svg>
         </LeafDecor>
         <LeafDecor className="bottom-left-decor">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
-            <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
-          </svg>
-        </LeafDecor>
-        <LeafDecor className="top-mid">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.3 65.33" fill="currentColor">
             <path d="M13.98 52.87c0.37,-0.8 0.6,-1.74 0.67,-2.74 1.01,1.1 2.23,2.68 1.24,3.87 -0.22,0.26 -0.41,0.61 -0.59,0.97 -2.95,5.89 3.44,10.87 2.98,0.78 0.29,0.23 0.73,0.82 1.03,1.18 0.33,0.4 0.7,0.77 1,1.15 0.29,0.64 -0.09,2.68 1.77,4.91 5.42,6.5 5.67,-2.38 0.47,-4.62 -0.41,-0.18 -0.95,-0.26 -1.28,-0.54 -0.5,-0.41 -1.23,-1.37 -1.66,-1.9 0.03,-0.43 -0.17,-0.13 0.11,-0.33 4.98,1.72 8.4,-1.04 2.38,-3.16 -1.98,-0.7 -2.9,-0.36 -4.72,0.16 -0.63,-0.58 -2.38,-3.82 -2.82,-4.76 1.21,0.56 1.72,1.17 3.47,1.3 6.5,0.5 2.31,-4.21 -2.07,-4.04 -1.12,0.04 -1.62,0.37 -2.49,0.62l-1.25 -3.11c0.03,-0.26 0.01,-0.18 0.1,-0.28z" />
           </svg>
@@ -305,18 +266,22 @@ const SignatureText = styled.div`
   }
 `;
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ $isNight: boolean }>`
   transform: scale(0.65); 
   transform-origin: top left;
   margin-bottom: -70px;
   margin-right: -100px;
+  transition: all 0.5s ease;
 
   .card {
     width: 350px;
     height: 235px;
     position: relative;
     padding: 25px;
-    background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #FFF7B1 0%, rgba(255, 255, 255, 0) 71.88%), #FFFFFF;
+    background: ${props => props.$isNight
+    ? `radial-gradient(178.94% 106.41% at 26.42% 106.41%, #1B2947 0%, #2C3E50 71.88%), #1A202C` // Dark Night Gradient
+    : `radial-gradient(178.94% 106.41% at 26.42% 106.41%, #FFF7B1 0%, rgba(255, 255, 255, 0) 71.88%), #FFFFFF` // Day Light Gradient
+  };
     box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: 23px;
     transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
@@ -361,11 +326,15 @@ const StyledWrapper = styled.div`
     animation-timing-function: ease-in-out;
   }
 
+  /* Cloud colors based on day/night */
+  .right-front, .left-front, .right-back, .left-back {
+    background-color: ${props => props.$isNight ? '#4B5563' : '#4c9beb'};
+  }
+
   .right-front {
     width: 45px;
     height: 45px;
     border-radius: 50% 50% 50% 0%;
-    background-color: #4c9beb;
     display: inline-block;
     margin-left: -25px;
     z-index: 5;
@@ -375,7 +344,6 @@ const StyledWrapper = styled.div`
     width: 65px;
     height: 65px;
     border-radius: 50% 50% 0% 50%;
-    background-color: #4c9beb;
     display: inline-block;
     z-index: 5;
   }
@@ -384,7 +352,6 @@ const StyledWrapper = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50% 50% 50% 0%;
-    background-color: #4c9beb;
     display: inline-block;
     margin-left: -20px;
     z-index: 5;
@@ -394,7 +361,6 @@ const StyledWrapper = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50% 50% 0% 50%;
-    background-color: #4c9beb;
     display: inline-block;
     z-index: 5;
   }
@@ -411,16 +377,44 @@ const StyledWrapper = styled.div`
   .sunshine {
     animation: sunshines 2s infinite;
   }
+  
+  /* Moon Styling */
+  .moon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to right, #D1D5DB, #E5E7EB);
+    border-radius: 60px;
+    display: inline;
+    position: absolute;
+    box-shadow: 0 0 20px rgba(255,255,255, 0.3);
+  }
+
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  .s1 { width: 3px; height: 3px; top: 10px; right: 40px; animation-delay: 0s; }
+  .s2 { width: 2px; height: 2px; top: 80px; left: 20px; animation-delay: 1s; }
+  .s3 { width: 3px; height: 3px; bottom: 20px; right: 60px; animation-delay: 2s; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+  }
 
   @keyframes sunshines {
-    0% {
-      transform: scale(1);
-      opacity: 0.6;
-    }
-    100% {
-      transform: scale(1.4);
-      opacity: 0;
-    }
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.4); opacity: 0; }
   }
 
   @keyframes clouds {
@@ -441,14 +435,14 @@ const StyledWrapper = styled.div`
     font-weight: 800;
     font-size: 15px;
     line-height: 135%;
-    color: rgba(87, 77, 51, 0.66);
+    color: ${props => props.$isNight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(87, 77, 51, 0.66)'};
   }
 
   .card-header span:last-child {
     font-weight: 700;
     font-size: 15px;
     line-height: 135%;
-    color: rgba(87, 77, 51, 0.33);
+    color: ${props => props.$isNight ? 'rgba(255, 255, 255, 0.5)' : 'rgba(87, 77, 51, 0.33)'};
   }
 
   .temp {
@@ -458,7 +452,7 @@ const StyledWrapper = styled.div`
     font-weight: 700;
     font-size: 64px;
     line-height: 77px;
-    color: rgba(87, 77, 51, 1);
+    color: ${props => props.$isNight ? 'rgba(255, 255, 255, 1)' : 'rgba(87, 77, 51, 1)'};
   }
 
   .temp-scale {
@@ -470,7 +464,7 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.06);
+    background: ${props => props.$isNight ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)'};
     border-radius: 9px;
   }
 
@@ -478,7 +472,7 @@ const StyledWrapper = styled.div`
     font-weight: 700;
     font-size: 13px;
     line-height: 134.49%;
-    color: rgba(87, 77, 51, 0.66);
+    color: ${props => props.$isNight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(87, 77, 51, 0.66)'};
   }
 `;
 
