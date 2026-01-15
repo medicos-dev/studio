@@ -33,14 +33,14 @@ const Header = () => {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('/#')) {
-        e.preventDefault();
-        const targetId = href.substring(2);
-        
-        if (pathname !== '/') {
-            window.location.href = `/${href}`;
-        } else {
-            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-        }
+      e.preventDefault();
+      const targetId = href.substring(2);
+
+      if (pathname !== '/') {
+        window.location.href = `/${href}`;
+      } else {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -49,7 +49,9 @@ const Header = () => {
     <header
       className={cn(
         'sticky top-0 z-50 w-full transition-all duration-300',
-        isScrolled || pathname !== '/' ? 'bg-background/80 shadow-md backdrop-blur-sm' : 'bg-transparent'
+        isScrolled || pathname !== '/'
+          ? 'bg-background/60 dark:bg-black/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 shadow-sm'
+          : 'bg-transparent'
       )}
     >
       <div className="container mx-auto px-4">
@@ -72,38 +74,38 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
-             <ThemeToggle />
-             <div className="md:hidden">
-               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                 <SheetTrigger asChild>
-                   <Button variant="ghost" size="icon" className="rounded-full">
-                     <Menu className="h-6 w-6" />
-                     <span className="sr-only">Open menu</span>
-                   </Button>
-                 </SheetTrigger>
-                 <SheetContent side="right" className="w-[280px] bg-background">
-                    <div className="flex h-full flex-col">
-                      <div className="flex items-center justify-between border-b pb-4">
-                         <Link href="/" className="flex items-center gap-2">
-                            <AsterasiaLogo className="h-7 text-primary" />
-                         </Link>
-                      </div>
-                      <nav className="mt-8 flex flex-col space-y-4">
-                        {navItems.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={(e) => handleLinkClick(e, item.href)}
-                            className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </nav>
+            <ThemeToggle />
+            <div className="md:hidden">
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Open menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[280px] bg-background">
+                  <div className="flex h-full flex-col">
+                    <div className="flex items-center justify-between border-b pb-4">
+                      <Link href="/" className="flex items-center gap-2">
+                        <AsterasiaLogo className="h-7 text-primary" />
+                      </Link>
                     </div>
-                 </SheetContent>
-               </Sheet>
-             </div>
+                    <nav className="mt-8 flex flex-col space-y-4">
+                      {navItems.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={(e) => handleLinkClick(e, item.href)}
+                          className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </div>
