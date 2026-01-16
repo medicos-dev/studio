@@ -296,7 +296,7 @@ const LeafDecor = styled.div`
   }
 
   &.top-left-mirror {
-    top: -18px;
+    top: -26px;
     left: -12px;
     color: hsl(var(--secondary));
     animation: leafPop2 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.55s forwards;
@@ -310,7 +310,7 @@ const LeafDecor = styled.div`
   }
 
   &.left-mid {
-    top: 40%;
+    top: 25%;
     left: -18px;
     color: hsl(var(--primary));
     animation: leafPop4 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.65s forwards;
@@ -318,14 +318,14 @@ const LeafDecor = styled.div`
 
   &.bottom-right-decor {
     bottom: -5px;
-    right: -10px;
+    right: -18px;
     color: hsl(var(--secondary));
     animation: leafPop5 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s forwards;
   }
 
   &.bottom-left-decor {
-    bottom: -12px;
-    left: -10px;
+    bottom: -15px;
+    left: -18px;
     color: hsl(var(--primary));
     animation: leafPop6 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.75s forwards;
   }
@@ -338,7 +338,7 @@ const LeafDecor = styled.div`
   }
 
   &.bottom-mid {
-    bottom: -16px;
+    bottom: -35px;
     left: 40%;
     color: hsl(var(--secondary));
     animation: leafPop8 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.85s forwards;

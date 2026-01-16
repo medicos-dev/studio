@@ -149,7 +149,7 @@ const LeafDecor = styled.div<{ $isVisible: boolean }>`
   }
 
   &.bottom-mid {
-    bottom: -16px;
+    bottom: -28px;
     left: 40%;
     color: hsl(var(--secondary));
     transform: ${props => props.$isVisible ? 'scale(1) rotate(180deg)' : 'scale(0) rotate(180deg)'};
