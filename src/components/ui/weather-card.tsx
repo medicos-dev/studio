@@ -277,8 +277,11 @@ const ContainerWrapper = styled.div`
 const LeafDecor = styled.div`
   position: absolute;
   z-index: -1;
-  opacity: 0.95;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.15));
+  
+  /* Start hidden, will pop in */
+  opacity: 0;
+  transform: scale(0);
   
   svg {
     width: 22px;
@@ -289,56 +292,89 @@ const LeafDecor = styled.div`
     top: -20px;
     right: -15px;
     color: hsl(var(--primary));
-    transform: rotate(20deg);
+    animation: leafPop1 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
   }
 
   &.top-left-mirror {
     top: -18px;
     left: -12px;
     color: hsl(var(--secondary));
-    transform: rotate(-30deg) scaleX(-1);
+    animation: leafPop2 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.55s forwards;
   }
 
   &.right-mid {
     top: 50%;
     right: -18px;
     color: hsl(var(--accent));
-    transform: rotate(90deg);
+    animation: leafPop3 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards;
   }
 
   &.left-mid {
     top: 40%;
     left: -18px;
     color: hsl(var(--primary));
-    transform: rotate(-90deg);
+    animation: leafPop4 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.65s forwards;
   }
 
   &.bottom-right-decor {
-    bottom: -15px;
+    bottom: -5px;
     right: -10px;
     color: hsl(var(--secondary));
-    transform: rotate(135deg);
+    animation: leafPop5 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s forwards;
   }
 
   &.bottom-left-decor {
     bottom: -12px;
     left: -10px;
     color: hsl(var(--primary));
-    transform: rotate(-135deg) scaleX(-1);
+    animation: leafPop6 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.75s forwards;
   }
 
   &.top-mid {
     top: -18px;
     left: 45%;
     color: hsl(var(--accent));
-    transform: rotate(0deg);
+    animation: leafPop7 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s forwards;
   }
 
   &.bottom-mid {
     bottom: -16px;
     left: 40%;
     color: hsl(var(--secondary));
-    transform: rotate(180deg);
+    animation: leafPop8 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.85s forwards;
+  }
+
+  @keyframes leafPop1 {
+    0% { opacity: 0; transform: scale(0) rotate(20deg); }
+    100% { opacity: 0.95; transform: scale(1) rotate(20deg); }
+  }
+  @keyframes leafPop2 {
+    0% { opacity: 0; transform: scale(0) rotate(-30deg) scaleX(-1); }
+    100% { opacity: 0.95; transform: scale(1) rotate(-30deg) scaleX(-1); }
+  }
+  @keyframes leafPop3 {
+    0% { opacity: 0; transform: scale(0) rotate(90deg); }
+    100% { opacity: 0.95; transform: scale(1) rotate(90deg); }
+  }
+  @keyframes leafPop4 {
+    0% { opacity: 0; transform: scale(0) rotate(-90deg); }
+    100% { opacity: 0.95; transform: scale(1) rotate(-90deg); }
+  }
+  @keyframes leafPop5 {
+    0% { opacity: 0; transform: scale(0) rotate(135deg); }
+    100% { opacity: 0.95; transform: scale(1) rotate(135deg); }
+  }
+  @keyframes leafPop6 {
+    0% { opacity: 0; transform: scale(0) rotate(-135deg) scaleX(-1); }
+    100% { opacity: 0.95; transform: scale(1) rotate(-135deg) scaleX(-1); }
+  }
+  @keyframes leafPop7 {
+    0% { opacity: 0; transform: scale(0); }
+    100% { opacity: 0.95; transform: scale(1); }
+  }
+  @keyframes leafPop8 {
+    0% { opacity: 0; transform: scale(0) rotate(180deg); }
+    100% { opacity: 0.95; transform: scale(1) rotate(180deg); }
   }
 `;
 
@@ -584,8 +620,12 @@ const StyledWrapper = styled.div<{ $isNight: boolean }>`
 const HeartDecor = styled.div`
   position: absolute;
   z-index: -1;
-  opacity: 0.9;
   filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
+  
+  /* Start hidden, will pop in */
+  opacity: 0;
+  transform: scale(0);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   
   svg {
     width: 24px;
@@ -597,66 +637,78 @@ const HeartDecor = styled.div`
     top: -12px;
     right: -8px;
     color: #ef4444; 
-    // transform: rotate(10deg);
     transform-origin: bottom center;
-    animation: drip 3s infinite ease-in-out;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards,
+               drip 3s infinite ease-in-out 0.9s;
   }
 
   &.top-left-mirror {
     top: -10px;
     left: -6px;
     color: #ec4899; 
-    // transform: rotate(-10deg);
     transform-origin: bottom center;
-    animation: drip 3s infinite ease-in-out 1.5s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards,
+               drip 3s infinite ease-in-out 1s;
   }
 
   &.right-mid {
     top: 50%;
     right: -12px;
     color: #f43f5e; 
-    // transform: rotate(90deg);
     transform-origin: bottom center;
-    animation: drip 3.5s infinite ease-in-out 0.5s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s forwards,
+               drip 3.5s infinite ease-in-out 1.1s;
   }
 
   &.left-mid {
     top: 40%;
     left: -12px;
     color: #d946ef; 
-    // transform: rotate(-90deg);
     transform-origin: bottom center;
-    animation: drip 3.5s infinite ease-in-out 2s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s forwards,
+               drip 3.5s infinite ease-in-out 1.2s;
   }
 
   &.bottom-right-decor {
     bottom: -8px;
     right: -6px;
     color: #ef4444;
-    // transform: rotate(135deg);
     transform-origin: bottom center;
-    animation: drip 4s infinite ease-in-out 1s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.9s forwards,
+               drip 4s infinite ease-in-out 1.3s;
   }
 
   &.bottom-left-decor {
     bottom: -6px;
     left: -6px;
     color: #ec4899;
-    // transform: rotate(-135deg);
     transform-origin: bottom center;
-    animation: drip 4s infinite ease-in-out 2.5s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards,
+               drip 4s infinite ease-in-out 1.4s;
   }
 
   &.bottom-mid {
     bottom: -10px;
     left: 45%;
     color: #f43f5e;
-    // transform: rotate(180deg);
     transform-origin: top center;
-    animation: drip 3s infinite ease-in-out 1.5s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.1s forwards,
+               drip 3s infinite ease-in-out 1.5s;
   }
 
-  /* Drip animation that grows "out" from the anchor point (tip) */
+  /* Pop-in animation */
+  @keyframes popIn {
+    0% { 
+      opacity: 0;
+      transform: scale(0);
+    }
+    100% { 
+      opacity: 0.9;
+      transform: scale(1);
+    }
+  }
+
+  /* Drip animation */
   @keyframes drip {
     0%, 100% { transform: translateY(0px) scale(1); }
     50% { transform: translateY(-3px) scale(1.1); }

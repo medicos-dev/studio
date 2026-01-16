@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 // The exact leaf SVG from weather card
@@ -11,46 +11,44 @@ const LeafSvg = () => (
 );
 
 const PhotoCard = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        setIsVisible(true);
+                    }, 500);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <StyledWrapper>
+        <StyledWrapper ref={containerRef}>
             <div className="card-container">
-                {/* Leaf decorations around the card - more leaves! */}
-                <LeafDecor className="top-right-main">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="top-left-mirror">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="top-mid">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="right-mid">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="right-upper">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="right-lower">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="left-mid">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="left-upper">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="left-lower">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="bottom-right-decor">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="bottom-left-decor">
-                    <LeafSvg />
-                </LeafDecor>
-                <LeafDecor className="bottom-mid">
-                    <LeafSvg />
-                </LeafDecor>
+                <LeafDecor className="top-right-main" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="top-left-mirror" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="top-mid" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="right-mid" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="right-upper" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="right-lower" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="left-mid" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="left-upper" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="left-lower" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="bottom-right-decor" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="bottom-left-decor" $isVisible={isVisible}><LeafSvg /></LeafDecor>
+                <LeafDecor className="bottom-mid" $isVisible={isVisible}><LeafSvg /></LeafDecor>
 
                 <div className="card">
                     <div className="image" />
@@ -60,12 +58,13 @@ const PhotoCard = () => {
     );
 };
 
-// Leaf decoration on borders (exact same style as weather card)
-const LeafDecor = styled.div`
+const LeafDecor = styled.div<{ $isVisible: boolean }>`
   position: absolute;
   z-index: 10;
-  opacity: 0.95;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.15));
+  opacity: ${props => props.$isVisible ? 0.95 : 0};
+  transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   svg {
     width: 22px;
@@ -76,84 +75,84 @@ const LeafDecor = styled.div`
     top: -20px;
     right: -15px;
     color: hsl(var(--primary));
-    transform: rotate(20deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(20deg)' : 'scale(0) rotate(20deg)'};
   }
 
   &.top-left-mirror {
     top: -18px;
     left: -12px;
     color: hsl(var(--secondary));
-    transform: rotate(-30deg) scaleX(-1);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(-30deg) scaleX(-1)' : 'scale(0) rotate(-30deg) scaleX(-1)'};
   }
 
   &.top-mid {
     top: -18px;
     left: 45%;
     color: hsl(var(--accent));
-    transform: rotate(0deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(0deg)' : 'scale(0) rotate(0deg)'};
   }
 
   &.right-mid {
     top: 50%;
     right: -18px;
     color: hsl(var(--accent));
-    transform: rotate(90deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(90deg)' : 'scale(0) rotate(90deg)'};
   }
 
   &.right-upper {
     top: 25%;
     right: -16px;
     color: hsl(var(--primary));
-    transform: rotate(70deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(70deg)' : 'scale(0) rotate(70deg)'};
   }
 
   &.right-lower {
     top: 70%;
     right: -16px;
     color: hsl(var(--secondary));
-    transform: rotate(110deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(110deg)' : 'scale(0) rotate(110deg)'};
   }
 
   &.left-mid {
     top: 40%;
     left: -18px;
     color: hsl(var(--primary));
-    transform: rotate(-90deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(-90deg)' : 'scale(0) rotate(-90deg)'};
   }
 
   &.left-upper {
     top: 20%;
     left: -16px;
     color: hsl(var(--accent));
-    transform: rotate(-70deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(-70deg)' : 'scale(0) rotate(-70deg)'};
   }
 
   &.left-lower {
     top: 65%;
     left: -16px;
     color: hsl(var(--secondary));
-    transform: rotate(-110deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(-110deg)' : 'scale(0) rotate(-110deg)'};
   }
 
   &.bottom-right-decor {
     bottom: -15px;
     right: -10px;
     color: hsl(var(--secondary));
-    transform: rotate(135deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(135deg)' : 'scale(0) rotate(135deg)'};
   }
 
   &.bottom-left-decor {
     bottom: -12px;
     left: -10px;
     color: hsl(var(--primary));
-    transform: rotate(-135deg) scaleX(-1);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(-135deg) scaleX(-1)' : 'scale(0) rotate(-135deg) scaleX(-1)'};
   }
 
   &.bottom-mid {
     bottom: -16px;
     left: 40%;
     color: hsl(var(--secondary));
-    transform: rotate(180deg);
+    transform: ${props => props.$isVisible ? 'scale(1) rotate(180deg)' : 'scale(0) rotate(180deg)'};
   }
 `;
 
