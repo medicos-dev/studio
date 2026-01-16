@@ -120,7 +120,7 @@ html {
 nextjs-portal,
 #__next-build-indicator,
 [class*="nextjs"],
-body > div[style*="z-index: 9999"] {
+body>div[style*="z-index: 9999"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
