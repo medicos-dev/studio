@@ -118,9 +118,9 @@ const GlassCard = styled.a<{ $isDark: boolean }>`
   &:hover {
     transform: translateY(-4px);
     box-shadow: ${props => props.$isDark
-    ? '0 12px 40px rgba(29, 185, 84, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3)'
-    : '0 12px 40px rgba(29, 185, 84, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05)'};
-    border-color: rgba(29, 185, 84, 0.2);
+    ? '0 0 20px rgba(29, 185, 84, 0.4), 0 0 40px rgba(29, 185, 84, 0.25), 0 12px 40px rgba(29, 185, 84, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3)'
+    : '0 0 20px rgba(29, 185, 84, 0.35), 0 0 40px rgba(29, 185, 84, 0.2), 0 12px 40px rgba(29, 185, 84, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05)'};
+    border-color: rgba(29, 185, 84, 0.4);
   }
 `;
 

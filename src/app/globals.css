@@ -113,3 +113,15 @@ html {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--primary) / 0.3) transparent;
 }
+
+/* Hide Next.js dev indicators */
+[data-nextjs-dialog-overlay],
+[data-nextjs-dialog],
+nextjs-portal,
+#__next-build-indicator,
+[class*="nextjs"],
+body > div[style*="z-index: 9999"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}

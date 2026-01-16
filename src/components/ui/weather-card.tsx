@@ -29,7 +29,17 @@ const WeatherCard = () => {
       { text: "Treat yourself to a Cucumber Mint Cooler. You deserve it.", type: 'normal' },
       { text: "Sweating? Let our chilled Mango Lassi save the day.", type: 'normal' },
       { text: "Hot days call for cool dates and Iced Lattes.", type: 'romantic' },
-      { text: "Share a refreshing Lemon Soda with someone special.", type: 'romantic' }
+      { text: "Share a refreshing Lemon Soda with someone special.", type: 'romantic' },
+      { text: "Our Watermelon Slush is summer in a glass.", type: 'normal' },
+      { text: "Cool down with a tropical Passion Fruit Cooler.", type: 'normal' },
+      { text: "Nothing beats the heat like our Blue Lagoon.", type: 'normal' },
+      { text: "Sparkling Iced Lemonade: your new summer obsession.", type: 'normal' },
+      { text: "Two straws, one cold coffee, endless love.", type: 'romantic' },
+      { text: "Frozen Mocha Bliss for the hottest days.", type: 'normal' },
+      { text: "Our Coconut Milk Shake is pure tropical heaven.", type: 'normal' },
+      { text: "Berry Blast Smoothie to keep you cool all day.", type: 'normal' },
+      { text: "Let's chill together over an Iced Caramel Latte.", type: 'romantic' },
+      { text: "Summer flings and cold drinks are our specialty.", type: 'romantic' }
     ];
 
     const warmPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
@@ -41,7 +51,18 @@ const WeatherCard = () => {
       { text: "Relax and unwind with our signature Cold Coffee.", type: 'normal' },
       { text: "Vanilla Sweet Cream Cold Brew: Love at first sip.", type: 'romantic' },
       { text: "Treat your date to a delicious Affogato.", type: 'romantic' },
-      { text: "Smooth Nitro Brew for a smooth day ahead.", type: 'normal' }
+      { text: "Smooth Nitro Brew for a smooth day ahead.", type: 'normal' },
+      { text: "Golden hour calls for a Golden Latte.", type: 'normal' },
+      { text: "Our Lavender Latte is pure afternoon bliss.", type: 'normal' },
+      { text: "Share stories over a Honey Almond Cappuccino.", type: 'romantic' },
+      { text: "The perfect weather for our Irish Cream Coffee.", type: 'normal' },
+      { text: "Discover love in every sip of our Rose Latte.", type: 'romantic' },
+      { text: "Maple Pecan Latte: Autumn in a cup.", type: 'normal' },
+      { text: "Our Oat Milk Latte is smooth like this weather.", type: 'normal' },
+      { text: "Perfect day for a café date and our Vienna Coffee.", type: 'romantic' },
+      { text: "Espresso Tonic: Refreshingly different.", type: 'normal' },
+      { text: "Let our Pistachio Latte make your day sweeter.", type: 'normal' },
+      { text: "Coffee, you, and this beautiful weather.", type: 'romantic' }
     ];
 
     const coolPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
@@ -52,7 +73,19 @@ const WeatherCard = () => {
       { text: "Red Velvet Latte: A hug in a mug.", type: 'normal' },
       { text: "Nothing beats a steaming cup of Earl Grey.", type: 'normal' },
       { text: "Fall in love with our Hazelnut Latte.", type: 'romantic' },
-      { text: "Rich Hot Chocolate. Pure liquid happiness.", type: 'normal' }
+      { text: "Rich Hot Chocolate. Pure liquid happiness.", type: 'normal' },
+      { text: "Snuggle up with our Cinnamon Dolce Latte.", type: 'romantic' },
+      { text: "Our Spiced Apple Cider warms from within.", type: 'normal' },
+      { text: "Pumpkin Spice Latte weather is here!", type: 'normal' },
+      { text: "Warm your heart with our Salted Caramel Mocha.", type: 'romantic' },
+      { text: "Perfect day for a cozy corner and Hot Toddy.", type: 'normal' },
+      { text: "Share a blanket and our Double Hot Chocolate.", type: 'romantic' },
+      { text: "Our Masala Chai will spice up your evening.", type: 'normal' },
+      { text: "Butterscotch Latte: Sweet warmth in every sip.", type: 'normal' },
+      { text: "Let's get lost in conversation over warm drinks.", type: 'romantic' },
+      { text: "Toasted Marshmallow Latte for a toasty day.", type: 'normal' },
+      { text: "Our Matcha Latte is zen in a cup.", type: 'normal' },
+      { text: "Hold hands, hold mugs, hold this moment.", type: 'romantic' }
     ];
 
     const coldPhrases: { text: string; type: 'normal' | 'romantic' }[] = [
@@ -63,7 +96,19 @@ const WeatherCard = () => {
       { text: "Keep each other warm with Double Espressos.", type: 'romantic' },
       { text: "Freezing? Our Turmeric Latte is a warm embrace.", type: 'normal' },
       { text: "Best time for deep talks and hot ginger tea.", type: 'romantic' },
-      { text: "Double piping hot Cappuccino to melt the frost.", type: 'normal' }
+      { text: "Double piping hot Cappuccino to melt the frost.", type: 'normal' },
+      { text: "Our Winter Spice Latte fights the freeze.", type: 'normal' },
+      { text: "Steaming Mulled Wine for frozen fingers.", type: 'normal' },
+      { text: "Come in from the cold to our warm embrace.", type: 'romantic' },
+      { text: "Irish Coffee to warm your winter soul.", type: 'normal' },
+      { text: "Our Chestnut Praline Latte is holiday magic.", type: 'normal' },
+      { text: "Share body heat and our Extra Hot Mocha.", type: 'romantic' },
+      { text: "Peppermint Hot Chocolate for frosty days.", type: 'normal' },
+      { text: "Create warmth together over Cardamom Tea.", type: 'romantic' },
+      { text: "Our Brandy Coffee is liquid courage.", type: 'normal' },
+      { text: "Snowy weather, warm hearts, hot lattes.", type: 'romantic' },
+      { text: "Triple shot Macchiato for triple cold weather.", type: 'normal' },
+      { text: "Stay warm, stay close, stay caffeinated.", type: 'romantic' }
     ];
 
     let selection;
@@ -549,65 +594,72 @@ const HeartDecor = styled.div`
   }
   
   &.top-right-main {
-    top: -24px;
-    right: -15px;
+    top: -12px;
+    right: -8px;
     color: #ef4444; 
-    transform: rotate(10deg);
+    // transform: rotate(10deg);
+    transform-origin: bottom center;
     animation: drip 3s infinite ease-in-out;
   }
 
   &.top-left-mirror {
-    top: -22px;
-    left: -12px;
+    top: -10px;
+    left: -6px;
     color: #ec4899; 
-    transform: rotate(-10deg);
+    // transform: rotate(-10deg);
+    transform-origin: bottom center;
     animation: drip 3s infinite ease-in-out 1.5s;
   }
 
   &.right-mid {
     top: 50%;
-    right: -18px;
+    right: -12px;
     color: #f43f5e; 
-    transform: rotate(90deg);
+    // transform: rotate(90deg);
+    transform-origin: bottom center;
     animation: drip 3.5s infinite ease-in-out 0.5s;
   }
 
   &.left-mid {
     top: 40%;
-    left: -18px;
+    left: -12px;
     color: #d946ef; 
-    transform: rotate(-90deg);
+    // transform: rotate(-90deg);
+    transform-origin: bottom center;
     animation: drip 3.5s infinite ease-in-out 2s;
   }
 
   &.bottom-right-decor {
-    bottom: -15px;
-    right: -10px;
+    bottom: -8px;
+    right: -6px;
     color: #ef4444;
-    transform: rotate(135deg);
+    // transform: rotate(135deg);
+    transform-origin: bottom center;
     animation: drip 4s infinite ease-in-out 1s;
   }
 
   &.bottom-left-decor {
-    bottom: -12px;
-    left: -10px;
+    bottom: -6px;
+    left: -6px;
     color: #ec4899;
-    transform: rotate(-135deg);
+    // transform: rotate(-135deg);
+    transform-origin: bottom center;
     animation: drip 4s infinite ease-in-out 2.5s;
   }
 
   &.bottom-mid {
-    bottom: -18px;
+    bottom: -10px;
     left: 45%;
     color: #f43f5e;
-    transform: rotate(180deg);
+    // transform: rotate(180deg);
+    transform-origin: top center;
     animation: drip 3s infinite ease-in-out 1.5s;
   }
 
   /* Drip animation that grows "out" from the anchor point (tip) */
   @keyframes drip {
-    0%, 100% { transform: translateY(0px) scale(1) rotate(var(--tw-rotate, 0)); }
-    50% { transform: translateY(-3px) scale(1.1) rotate(var(--tw-rotate, 0)); }
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.1); }
   }
 `;
 

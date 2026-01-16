@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import StyledComponentsRegistry from '@/lib/styled-components-registry';
 import BackToTopButton from '@/components/ui/back-to-top';
 import SpotifyWidget from '@/components/ui/spotify-widget';
+import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 
 export const metadata: Metadata = {
   title: 'Asterasia Café',
@@ -40,13 +41,15 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <StyledComponentsRegistry>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <BackToTopButton />
-            <Toaster />
+            <SmoothScrollProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+              <BackToTopButton />
+              <Toaster />
+            </SmoothScrollProvider>
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
