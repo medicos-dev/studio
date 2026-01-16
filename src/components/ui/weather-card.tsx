@@ -232,8 +232,8 @@ const ContainerWrapper = styled.div`
 const LeafDecor = styled.div`
   position: absolute;
   z-index: -1;
-  opacity: 0.7;
-  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));
+  opacity: 0.95;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.15));
   
   svg {
     width: 22px;
@@ -243,56 +243,56 @@ const LeafDecor = styled.div`
   &.top-right-main {
     top: -20px;
     right: -15px;
-    color: hsl(var(--primary) / 0.8);
+    color: hsl(var(--primary));
     transform: rotate(20deg);
   }
 
   &.top-left-mirror {
     top: -18px;
     left: -12px;
-    color: hsl(var(--secondary) / 0.7);
+    color: hsl(var(--secondary));
     transform: rotate(-30deg) scaleX(-1);
   }
 
   &.right-mid {
     top: 50%;
     right: -18px;
-    color: hsl(var(--accent) / 0.6);
+    color: hsl(var(--accent));
     transform: rotate(90deg);
   }
 
   &.left-mid {
     top: 40%;
     left: -18px;
-    color: hsl(var(--primary) / 0.5);
+    color: hsl(var(--primary));
     transform: rotate(-90deg);
   }
 
   &.bottom-right-decor {
     bottom: -15px;
     right: -10px;
-    color: hsl(var(--secondary) / 0.8);
+    color: hsl(var(--secondary));
     transform: rotate(135deg);
   }
 
   &.bottom-left-decor {
     bottom: -12px;
     left: -10px;
-    color: hsl(var(--primary) / 0.6);
+    color: hsl(var(--primary));
     transform: rotate(-135deg) scaleX(-1);
   }
 
   &.top-mid {
     top: -18px;
     left: 45%;
-    color: hsl(var(--accent) / 0.5);
+    color: hsl(var(--accent));
     transform: rotate(0deg);
   }
 
   &.bottom-mid {
     bottom: -16px;
     left: 40%;
-    color: hsl(var(--secondary) / 0.7);
+    color: hsl(var(--secondary));
     transform: rotate(180deg);
   }
 `;
